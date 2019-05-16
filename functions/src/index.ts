@@ -4,7 +4,7 @@ import PasswordGenerator from "./PasswordGenerator";
 
 admin.initializeApp();
 
-export const helloWorld = functions.https.onRequest((request, response) => {
+export const password = functions.https.onRequest((request, response) => {
   const g = new PasswordGenerator();
   response.send(g.generate());
 });
