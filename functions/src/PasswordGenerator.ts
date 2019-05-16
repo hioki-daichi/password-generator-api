@@ -1,4 +1,4 @@
-const passwordLength = 16;
+const defaultPasswordLength = 16;
 
 enum Finger {
   LIndex,
@@ -14,10 +14,12 @@ enum Finger {
 export class PasswordGenerator {
   readonly useNumber: boolean;
   readonly useSign: boolean;
+  readonly passwordLength: number;
 
-  constructor(useNumber: boolean, useSign: boolean) {
+  constructor(useNumber: boolean, useSign: boolean, passwordLength: number) {
     this.useNumber = useNumber;
     this.useSign = useSign;
+    this.passwordLength = passwordLength || defaultPasswordLength;
   }
 
   generate(): string {
@@ -43,7 +45,7 @@ export class PasswordGenerator {
       isNextLeft = true,
       ret = "";
 
-    for (let i = 0; i < passwordLength; i++) {
+    for (let i = 0; i < this.passwordLength; i++) {
       if (isNextLeft) {
         ret += this.randomKey(lFingers[lIdx]);
         lIdx = (lIdx + 1) % lLen;
