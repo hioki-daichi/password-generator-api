@@ -35,13 +35,27 @@ export class PasswordGenerator {
       Finger.RChild
     ]);
 
-    const fingers = lFingers
-      .map((f: Finger, idx: number) => [f, rFingers[idx]])
-      .reduce((acc: Finger[], cur: Finger[]) => acc.concat(cur), []);
+    const lLen = lFingers.length;
+    const rLen = rFingers.length;
 
-    return [...Array(passwordLength)]
-      .map((_, idx: number) => this.randomKey(fingers[idx % fingers.length]))
-      .join("");
+    let lIdx = 0,
+      rIdx = 0,
+      isNextLeft = true,
+      ret = "";
+
+    for (let i = 0; i < passwordLength; i++) {
+      if (isNextLeft) {
+        ret += this.randomKey(lFingers[lIdx]);
+        lIdx = (lIdx + 1) % lLen;
+      } else {
+        ret += this.randomKey(rFingers[rIdx]);
+        rIdx = (rIdx + 1) % rLen;
+      }
+
+      isNextLeft = !isNextLeft;
+    }
+
+    return ret;
   }
 
   randomKey(f: Finger): string {
