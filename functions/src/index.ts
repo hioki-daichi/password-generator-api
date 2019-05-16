@@ -5,6 +5,7 @@ import { PasswordGenerator } from "./PasswordGenerator";
 admin.initializeApp();
 
 export const password = functions.https.onRequest((request, response) => {
+  response.set("Access-Control-Allow-Origin", "*");
   const { useNumber, useSign } = request.query;
   const g = new PasswordGenerator(
     parseBoolFromString(useNumber),
