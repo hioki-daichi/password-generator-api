@@ -1,8 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import PasswordGenerator from "./PasswordGenerator";
 
 admin.initializeApp();
 
 export const helloWorld = functions.https.onRequest((request, response) => {
-  response.send("Hello from Firebase!");
+  const g = new PasswordGenerator();
+  response.send(g.generate());
 });
