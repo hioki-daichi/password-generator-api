@@ -13,9 +13,11 @@ enum Finger {
 
 export class PasswordGenerator {
   readonly useNumber: boolean;
+  readonly useSign: boolean;
 
-  constructor(useNumber: boolean) {
+  constructor(useNumber: boolean, useSign: boolean) {
     this.useNumber = useNumber;
+    this.useSign = useSign;
   }
 
   generate(): string {
@@ -87,11 +89,20 @@ export class PasswordGenerator {
         if (this.useNumber) {
           keys += "9";
         }
+        if (this.useSign) {
+          keys += ",";
+        }
+        if (this.useSign) {
+          keys += ".";
+        }
         break;
       case Finger.RChild:
         keys += "p";
         if (this.useNumber) {
           keys += "0";
+        }
+        if (this.useSign) {
+          keys += ";/";
         }
         break;
     }

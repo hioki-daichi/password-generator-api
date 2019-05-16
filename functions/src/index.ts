@@ -5,8 +5,11 @@ import { PasswordGenerator } from "./PasswordGenerator";
 admin.initializeApp();
 
 export const password = functions.https.onRequest((request, response) => {
-  const useNumber = parseBoolFromString(request.query.useNumber);
-  const g = new PasswordGenerator(useNumber);
+  const { useNumber, useSign } = request.query;
+  const g = new PasswordGenerator(
+    parseBoolFromString(useNumber),
+    parseBoolFromString(useSign)
+  );
   response.send(g.generate());
 });
 
