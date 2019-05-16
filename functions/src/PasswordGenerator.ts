@@ -12,7 +12,11 @@ enum Finger {
 }
 
 export default class PasswordGenerator {
-  constructor() {}
+  readonly useNumber: boolean;
+
+  constructor(useNumber: boolean) {
+    this.useNumber = useNumber;
+  }
 
   generate(): string {
     const lFingers = shuffle([
@@ -38,33 +42,57 @@ export default class PasswordGenerator {
       .join("");
   }
 
-  private randomKey(f: Finger): string {
+  randomKey(f: Finger): string {
     let keys = "";
 
     switch (f) {
       case Finger.LIndex:
         keys += "tgbrfv";
+        if (this.useNumber) {
+          keys += "54";
+        }
         break;
       case Finger.LMiddle:
         keys += "edc";
+        if (this.useNumber) {
+          keys += "3";
+        }
         break;
       case Finger.LRing:
         keys += "wsx";
+        if (this.useNumber) {
+          keys += "2";
+        }
         break;
       case Finger.LChild:
         keys += "qaz";
+        if (this.useNumber) {
+          keys += "1";
+        }
         break;
       case Finger.RIndex:
         keys += "yhnujm";
+        if (this.useNumber) {
+          keys += "67";
+        }
         break;
       case Finger.RMiddle:
         keys += "ik";
+        if (this.useNumber) {
+          keys += "8";
+        }
         break;
       case Finger.RRing:
         keys += "ol";
+        if (this.useNumber) {
+          keys += "9";
+        }
         break;
       case Finger.RChild:
         keys += "p";
+        if (this.useNumber) {
+          keys += "0";
+        }
         break;
     }
 
