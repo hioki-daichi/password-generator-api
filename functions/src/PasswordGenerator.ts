@@ -11,7 +11,7 @@ enum Finger {
   RChild
 }
 
-export default class PasswordGenerator {
+export class PasswordGenerator {
   readonly useNumber: boolean;
 
   constructor(useNumber: boolean) {
